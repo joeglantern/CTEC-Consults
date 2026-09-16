@@ -1,0 +1,78 @@
+GEMINI PRO IMAGE QUEUE (rev 3). One line = one generation. Model: Gemini Pro, image generation, 16:9.
+Save each result with the filename at the start of its line, into site/public/img/real/.
+
+THE FORMULA (why it works)
+Realism comes from camera and light language, not from grime. Every prompt says: real photograph not a render,
+shot on 35mm film, available light only, natural grain, shallow focus, slightly off-centre framing.
+Every prompt also says the surfaces are CLEAN and WELL KEPT and the materials are good (walnut, brushed steel,
+matte black, polished concrete, linen). Never say worn, scuffed, scratched, dusty, cluttered, stained, chipped:
+that reads poor, not premium.
+
+PEOPLE RULE: no faces anywhere. People only appear as a cropped detail when the shot needs one, and those are
+dark-skinned Kenyan hands, cropped at the wrists, well groomed.
+
+SERVICES
+
+svc-strategic-innovation.jpg -> A real photograph, not a render, 16:9. Candid documentary photo shot on 35mm film, available light only. Subject: the left and right hand of one dark-skinned Kenyan engineer, clean rolled shirt sleeves, cropped at the wrists, no face in frame, seating a small circuit module into a larger dark circuit board on a clean modern workbench of matte black steel and pale wood. One warm task lamp at the left edge, the rest of the room falling to black. Natural film grain, shallow focus, slightly off-centre framing. Everything tidy and well kept. No CGI, no studio lighting, no text, no logos, no watermark.
+
+svc-project-management.jpg -> A real photograph, not a render, 16:9. Candid documentary photo shot on 35mm film, available light only. Subject: overhead view of a crisp printed project schedule with clean bars and a grid, lying on a smooth dark walnut table, a brushed steel ruler and a sharpened pencil placed neatly across it. One warm lamp raking from the left, deep shadow at the edges. Natural film grain, shallow focus, slightly off-centre framing. Surfaces clean and well kept. Text on the page not legible. No people, no hands, no CGI, no studio lighting, no logos, no watermark.
+
+svc-strategic-planning.jpg -> A real photograph, not a render, 16:9. Candid documentary macro photo shot on 35mm film, available light only. Subject: a polished brass compass resting on a crisp folded topographic map on a smooth dark surface. One warm light catches the brass, the map falls into shadow toward black at the edges. Natural film grain, shallow focus, slightly off-centre framing. Everything clean and well kept. Map text not legible. No people, no hands, no CGI, no studio lighting, no logos, no watermark.
+
+svc-policy-frameworks.jpg -> A real photograph, not a render, 16:9. Candid documentary photo shot on 35mm film, available light only. Subject: a row of thick hardbound volumes with smooth cloth spines standing neatly on a dark walnut shelf, gold edge foil catching one warm light from the side, deep shadow around them. Natural film grain, shallow focus, slightly off-centre framing. Clean, well kept, like a good private library. Spine text not legible. No people, no hands, no CGI, no studio lighting, no logos, no watermark.
+
+svc-digital-transformation.jpg -> A real photograph, not a render, 16:9. Candid documentary photo shot on 35mm film, available light only. Subject: inside a clean modern data centre at night, one immaculate server rack with rows of small amber and white status LEDs, the dark aisle receding behind it, cabling neatly dressed. Natural film grain, shallow depth of field, slightly off-centre framing, underexposed. No people, no hands, no CGI, no glossy render, no text, no logos, no watermark.
+
+svc-mel.jpg -> A real photograph, not a render, 16:9. Candid documentary photo shot on 35mm film, available light only. Subject: overhead view of a clean linen-bound notebook open to a page of neat handwritten tally marks, a good pen beside it, and a dark tablet with its screen off, on a smooth walnut table in warm late evening light. Natural film grain, shallow focus, slightly off-centre framing. Tidy and well kept. Handwriting not legible. No people, no hands, no CGI, no studio lighting, no logos, no watermark.
+
+svc-capacity-building.jpg -> A real photograph, not a render, 16:9. Candid documentary photo shot on 35mm film, available light only. Subject: a clean modern training room seen from the back row, tidy rows of matching chairs facing a blank whiteboard, warm late afternoon sun through slatted blinds throwing stripes across a polished floor. Natural film grain, slightly off-centre framing, underexposed. Well kept and modern. No people, no hands, no CGI, no studio lighting, no text, no logos, no watermark.
+
+svc-research.jpg -> A real photograph, not a render, 16:9. Candid documentary photo shot on 35mm film, available light only. Subject: a clean wooden card catalogue with one drawer open and one index card standing slightly proud, warm lamp light, dark surroundings. Natural film grain, shallow depth of field, slightly off-centre framing. Well kept, like a good archive. Card text not legible. No people, no hands, no CGI, no studio lighting, no logos, no watermark.
+
+svc-esg.jpg -> A real photograph, not a render, 16:9. Candid documentary macro photo shot on 35mm film, available light only. Subject: a young green seedling in rich dark soil, warm side light on the leaves, one water droplet on a leaf, black background. Natural film grain, shallow depth of field, slightly off-centre framing. No people, no hands, no CGI, no studio lighting, no text, no watermark.
+
+SECTORS
+
+sec-government.jpg -> A real photograph, not a render, 16:9. Candid documentary photo shot on 35mm film, available light only. Subject: the stone colonnade of a well maintained civic building at dusk, tall clean columns lit warm from one side, long shadows across smooth flagstones, deep indigo sky beyond, empty. Natural film grain, slightly off-centre framing. No people, no hands, no CGI, no text, no flags, no logos, no watermark.
+
+sec-ngos.jpg -> A real photograph, not a render, 16:9. Candid documentary photo shot on 35mm film, available light only. Subject: the interior of a clean, well organised relief supply warehouse, neatly stacked sacks and crates in tidy rows, one shaft of warm light from a high window, the rest in shadow. Natural film grain, slightly off-centre framing. No people, no hands, no CGI, no legible text, no logos, no watermark.
+
+sec-private-sector.jpg -> A real photograph, not a render, 16:9. Candid documentary photo shot on 35mm film, available light only. Subject: the interior of a tidy modern workshop in Nairobi at golden hour, tools hung in order on a clean pegboard wall, a smooth timber workbench, warm sun through the open doorway throwing a shaft of light across the floor. Natural film grain, shallow depth of field, slightly off-centre framing. Well kept and modern. No people, no hands, no CGI, no text, no logos, no watermark.
+
+sec-education.jpg -> A real photograph, not a render, 16:9. Candid documentary photo shot on 35mm film, available light only. Subject: long polished reading tables in a fine university library, brass lamps with green glass shades making pools of warm light on clean dark wood, tall shelves falling into shadow. Natural film grain, shallow depth of field, slightly off-centre framing. Immaculate. No people, no hands, no CGI, no text, no logos, no watermark.
+
+sec-healthcare.jpg -> A real photograph, not a render, 16:9. Candid documentary photo shot on 35mm film, available light only. Subject: a spotless modern clinic corridor, pale bone walls, a single warm light at the far end, polished floor with a soft reflection, empty and calm. Natural film grain, shallow depth of field, slightly off-centre framing. No people, no hands, no CGI, no text, no logos, no watermark.
+
+sec-agriculture.jpg -> A real photograph, not a render, 16:9. Aerial documentary photo shot on medium format film, available light only. Subject: neat terraced farmland in the Kenyan highlands at first light, mist in the valley, warm sunrise on the ridges, one red earth road curving through healthy green fields. Natural film grain, slightly off-centre framing. No people, no hands, no CGI, no text, no watermark.
+
+PILLARS (these sit on a light card, keep them a touch brighter)
+
+pillar-diagnose.jpg -> A real photograph, not a render, 16:9. Candid documentary macro photo shot on 35mm film, available light only. Subject: a polished jeweller's loupe resting on a crisp printed map, warm light, clean smooth surface. Natural film grain, shallow focus, slightly off-centre framing. Map text not legible. No people, no hands, no CGI, no logos, no watermark.
+
+pillar-codesign.jpg -> A real photograph, not a render, 16:9. Candid documentary photo shot on 35mm film, available light only. Subject: overhead view of the two hands of one dark-skinned Kenyan designer, clean sleeves, cropped at the wrists, no face in frame, drawing with a pencil on tracing paper laid over a crisp blueprint on a smooth pale desk, warm lamp light. Natural film grain, shallow focus, slightly off-centre framing. Tidy and well kept. No faces, drawing not legible, no CGI, no logos, no watermark.
+
+pillar-implement.jpg -> A real photograph, not a render, 16:9. Candid documentary photo shot on 35mm film, available light only. Subject: a clean spirit level resting on a smooth freshly poured concrete beam on a well run construction site, warm evening light. Natural film grain, shallow focus, slightly off-centre framing. No people, no hands, no CGI, no text, no logos, no watermark.
+
+pillar-sustain.jpg -> A real photograph, not a render, 16:9. Candid documentary photo shot on 35mm film, available light only. Subject: one dark-skinned Kenyan hand passing a set of keys to another dark-skinned hand, both cropped at the wrists, no face in frame, clean well groomed hands, warm side light, dark clean background. Natural film grain, shallow focus, slightly off-centre framing. No faces, no CGI, no text, no watermark.
+
+VIDEO STILLS (same prompts, saved as site/public/img/<name>-poster.jpg, then animated in Veo)
+
+workshop-poster.jpg -> same prompt as sec-private-sector.jpg
+library-poster.jpg -> same prompt as sec-education.jpg
+clinic-poster.jpg -> same prompt as sec-healthcare.jpg
+colonnade-poster.jpg -> same prompt as sec-government.jpg
+warehouse-poster.jpg -> same prompt as sec-ngos.jpg
+city-dusk-poster.jpg -> A real photograph, not a render, 16:9. Candid documentary photo shot on 35mm film, available light only. Subject: a clean modern Nairobi street at blue hour seen from a rooftop, warm windows and streetlights coming on, traffic light trails on the avenue, deep indigo sky. Long exposure, natural film grain, slightly off-centre framing. No text, no logos, no watermark.
+
+STATUS (16 Sep)
+All 19 section images are generated, placed in site/public/img/real/ under the filenames above, and wired
+into src/content/site.ts. Every image was re-encoded at q:v 2 and the two full size downloads were scaled
+to 1376 wide, so the whole set is 3.6 MB instead of 14 MB.
+
+Also kept: svc-capacity-building-alt.jpg, a second training room take, and city-dusk.jpg for the contact
+panel once the Veo clip exists.
+
+The old footage crops (atrium, circuit, fibre, nairobi, highlands, fins) are no longer used by the site.
+They now sit in brief/assets/old-crops/ rather than in public, so they are out of the build.
+
+Video prompts moved to 10-veo-video-queue.md.

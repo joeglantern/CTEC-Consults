@@ -27,7 +27,6 @@ site/          the app
   public/      video, stills, models, icons
   scripts/     favicon and social card generation
 brief/         planning docs, prompts and the approved copy
-design/        design canvas files
 ```
 
 ## Content rule

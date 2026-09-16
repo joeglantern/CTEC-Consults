@@ -9,9 +9,14 @@ dist/
 # working files, originals stay in the project folder rather than the repo
 brief/assets/
 brief/refs/
+design/
 *.docx
 
+# editor and tool folders
+.vscode/
+.idea/
 .claude/
+
 .DS_Store
 Thumbs.db
 *.log
