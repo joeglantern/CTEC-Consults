@@ -1,0 +1,11 @@
+.wall {
+  position: fixed; inset: 0; z-index: 900;
+  display: grid; grid-template-columns: repeat(12, 1fr); grid-template-rows: repeat(7, 1fr);
+}
+.wall .tile {
+  display: block; background: var(--bone);
+  transform-origin: center; will-change: transform, opacity;
+}
+.wall .tile:nth-child(11n) { background: var(--ochre); }
+.wall .tile:nth-child(7n+3) { border-radius: 0 40% 0 0; }
+.wall .tile:nth-child(5n+1) { border-radius: 40% 0 0 0; }

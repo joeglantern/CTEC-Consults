@@ -1,0 +1,26 @@
+.ct-grid { padding: 160px var(--gutter) var(--section); display: grid; grid-template-columns: minmax(0, 1fr) 520px; gap: 80px; align-items: start; }
+.ct-left { display: flex; flex-direction: column; gap: 40px; }
+.ct-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 24px; max-width: 760px; }
+.field { display: flex; flex-direction: column; gap: 10px; }
+.field-full { grid-column: span 2; }
+.lbl { color: var(--mist); font-size: 11px; }
+.field input, .field select, .field textarea {
+  font: inherit; color: var(--bone); background: var(--graphite); border: 1px solid var(--ash); border-radius: 12px;
+  padding: 0 18px; min-height: 56px; width: 100%; transition: border-color 0.18s, box-shadow 0.18s;
+}
+.field textarea { padding: 16px 18px; resize: vertical; }
+.field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239A9B92' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 18px center; }
+.field input::placeholder, .field textarea::placeholder { color: var(--mist); }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--ochre); box-shadow: 0 0 0 3px rgba(224,160,48,0.18); }
+.ct-note { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-radius: 12px; font-size: 15px; }
+.ct-ok { border: 1px solid var(--moss); background: rgba(58,107,74,0.15); }
+.ct-err { border: 1px solid var(--oxblood); background: rgba(122,46,46,0.15); }
+.ct-right { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; }
+.ct-media { position: relative; width: 100%; height: 560px; border-radius: 24px; overflow: hidden; border: 1px solid var(--ash); }
+.ct-details { display: flex; flex-direction: column; gap: 14px; border-top: 1px solid var(--ash); padding-top: 24px; width: 100%; }
+.ct-details a, .ct-details span { display: inline-flex; align-items: center; gap: 12px; }
+@media (max-width: 1000px) {
+  .ct-grid { grid-template-columns: 1fr; gap: 40px; padding-top: 120px; }
+  .ct-form { grid-template-columns: 1fr; } .field-full { grid-column: auto; }
+  .ct-media { height: 240px; }
+}

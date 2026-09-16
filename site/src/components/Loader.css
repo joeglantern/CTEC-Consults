@@ -1,0 +1,17 @@
+.loader {
+  position: fixed; inset: 0; z-index: 1000; background: var(--ink); color: var(--bone);
+  display: flex; align-items: center; justify-content: center; overflow: hidden; will-change: transform;
+}
+.ld-ink { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; will-change: transform, opacity; }
+.ld-grid {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  display: grid; grid-template-columns: repeat(12, 64px); grid-template-rows: repeat(7, 64px); gap: 14px;
+}
+.ld-tile { display: block; width: 64px; height: 64px; color: var(--bone); opacity: 0; will-change: transform, opacity; }
+.ld-tile svg { width: 100%; height: 100%; display: block; }
+.ld-mark { position: relative; width: 120px; height: 120px; opacity: 0; filter: drop-shadow(0 0 40px rgba(12,13,11,1)); }
+@media (max-width: 900px) {
+  .ld-grid { grid-template-columns: repeat(12, 36px); grid-template-rows: repeat(7, 36px); gap: 8px; }
+  .ld-tile { width: 36px; height: 36px; }
+  .ld-mark { width: 88px; height: 88px; }
+}

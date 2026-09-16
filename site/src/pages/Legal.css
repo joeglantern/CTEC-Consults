@@ -1,0 +1,101 @@
+/* Legal pages: privacy policy and terms of use */
+.legal { --lg-rule: color-mix(in oklab, var(--ink) 14%, transparent); --lg-num: 3.5rem; padding-bottom: var(--section); }
+
+/* hero: a three-area grid, copy on the left, meta on the right, the glance strip spanning both */
+.lg-hero {
+  display: grid; gap: 40px 60px; align-items: end; padding-top: 160px; padding-bottom: 48px;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  grid-template-areas: "copy meta" "glance glance";
+}
+.lg-hero-copy { grid-area: copy; display: flex; flex-direction: column; gap: 20px; }
+.lg-title { font-size: clamp(38px, 5vw, 76px); line-height: 0.98; letter-spacing: -0.01em; font-weight: 400; text-wrap: balance; max-width: 16ch; }
+.lg-intro { max-width: 62ch; text-wrap: pretty; }
+
+.lg-meta { grid-area: meta; display: grid; gap: 18px; margin: 0; padding: 0 0 6px; border-left: 1px solid var(--lg-rule); padding-left: 24px; }
+.lg-meta div { display: grid; gap: 6px; }
+.lg-meta dt { font-size: 12px; color: var(--mist-dark); letter-spacing: 0.08em; text-transform: uppercase; }
+.lg-meta dd { margin: 0; font-size: 16px; }
+.lg-switch { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 2px; transition: gap 0.3s var(--ease-out), color 0.2s; }
+.lg-switch:hover { gap: 14px; color: var(--ochre); }
+
+/* the glance strip: auto-fitting cards on a hairline grid, no gaps, borders drawn by the grid background */
+.lg-glance {
+  grid-area: glance; list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1px;
+  background: var(--lg-rule); border: 1px solid var(--lg-rule); border-radius: 20px; overflow: hidden;
+}
+.lg-glance li { background: var(--bone); padding: 20px 22px; display: grid; gap: 8px; align-content: start; min-height: 96px; transition: background 0.3s; }
+.lg-glance li:hover { background: var(--parchment); }
+.lg-glance-k { font-size: 11px; color: var(--mist-dark); letter-spacing: 0.08em; text-transform: uppercase; }
+.lg-glance-v { font-size: 16px; line-height: 1.35; text-wrap: balance; overflow-wrap: anywhere; }
+
+/* body: sticky contents beside the article */
+.lg-body { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 60px 80px; align-items: start; padding-top: 48px; border-top: 1px solid var(--lg-rule); }
+.lg-toc { position: sticky; top: 110px; display: grid; gap: 18px; }
+.lg-toc-head { font-size: 12px; color: var(--mist-dark); letter-spacing: 0.08em; text-transform: uppercase; }
+.lg-toc ol { list-style: none; margin: 0; padding: 0; display: grid; counter-reset: toc; border-left: 1px solid var(--lg-rule); }
+.lg-toc li { counter-increment: toc; position: relative; }
+.lg-toc li::before {
+  content: ""; position: absolute; left: -1px; top: 0; bottom: 0; width: 2px; background: var(--ochre);
+  transform: scaleY(0); transform-origin: top; transition: transform 0.35s var(--ease-out);
+}
+.lg-toc li.is-active::before { transform: scaleY(1); }
+.lg-toc a {
+  display: grid; grid-template-columns: 2.2em 1fr; align-items: baseline; gap: 6px;
+  padding: 8px 0 8px 18px; font-size: 14px; line-height: 1.35; color: var(--ink-soft); text-decoration: none;
+  transition: color 0.2s, padding-left 0.3s var(--ease-out);
+}
+.lg-toc a::before { content: counter(toc, decimal-leading-zero); font-family: var(--mono); font-size: 11px; color: var(--mist-dark); }
+.lg-toc li.is-active a, .lg-toc a:hover { color: var(--ink); }
+.lg-toc li.is-active a { padding-left: 24px; }
+.lg-print { justify-self: start; background: none; border: 1px solid var(--lg-rule); border-radius: 999px; padding: 8px 14px; font-size: 12px; color: var(--ink-soft); cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+.lg-print:hover { border-color: var(--ink); color: var(--ink); }
+
+/* article: a subgrid with a number gutter, so every section aligns on the same two columns */
+.lg-article { display: grid; grid-template-columns: var(--lg-num) minmax(0, 1fr); counter-reset: sec; }
+.lg-section {
+  grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; column-gap: 24px; row-gap: 14px;
+  padding: 36px 0; border-top: 1px solid var(--lg-rule); scroll-margin-top: 110px; counter-increment: sec;
+  position: relative;
+}
+.lg-section:first-child { border-top: 0; padding-top: 4px; }
+.lg-section::before {
+  content: counter(sec, decimal-leading-zero); grid-column: 1; grid-row: 1;
+  font-family: var(--mono); font-size: 12px; color: var(--mist-dark); letter-spacing: 0.06em; padding-top: 10px;
+}
+.lg-section:target::before { color: var(--ochre); }
+.lg-h { grid-column: 2; grid-row: 1; font-size: clamp(24px, 2.2vw, 32px); line-height: 1.12; font-weight: 400; text-wrap: balance; }
+.lg-text { grid-column: 2; grid-row: 2; max-width: 68ch; display: grid; gap: 14px; font-size: 17px; line-height: 1.6; color: var(--ink-soft); text-wrap: pretty; hanging-punctuation: first; }
+.lg-text p { margin: 0; }
+.lg-text ul { margin: 4px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.lg-text li { position: relative; padding-left: 26px; }
+.lg-text li::before { content: ""; position: absolute; left: 0; top: 0.72em; width: 12px; height: 1px; background: var(--ochre); }
+.lg-end { grid-column: 2; display: flex; justify-content: space-between; align-items: center; gap: 24px; padding-top: 36px; border-top: 1px solid var(--lg-rule); flex-wrap: wrap; }
+
+@media (max-width: 1000px) {
+  .lg-hero { grid-template-columns: 1fr; grid-template-areas: "copy" "meta" "glance"; padding-top: 120px; }
+  .lg-meta { border-left: 0; padding-left: 0; grid-template-columns: 1fr 1fr; }
+  .lg-body { grid-template-columns: 1fr; gap: 32px; }
+  .lg-toc { position: static; }
+  .lg-toc ol { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); border-left: 0; }
+  .lg-toc li::before { display: none; }
+  .lg-toc a { padding-left: 0; }
+  .lg-toc li.is-active a { padding-left: 0; }
+  .lg-print { display: none; }
+}
+@media (max-width: 640px) {
+  .legal { --lg-num: 2.2rem; }
+  .lg-meta { grid-template-columns: 1fr; }
+  .lg-section { padding: 28px 0; }
+  .lg-text { font-size: 16px; }
+}
+
+@media print {
+  .legal { padding: 0; }
+  .lg-toc, .lg-print, .lg-end, .lg-switch { display: none !important; }
+  .lg-hero { padding-top: 0; grid-template-columns: 1fr; grid-template-areas: "copy" "meta" "glance"; }
+  .lg-body { grid-template-columns: 1fr; border-top: 0; }
+  .lg-section { break-inside: avoid; }
+  .lg-title { font-size: 32pt; }
+  .lg-text { font-size: 11pt; color: #000; }
+}

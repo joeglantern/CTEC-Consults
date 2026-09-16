@@ -1,0 +1,28 @@
+.svc-hero { position: relative; padding: 160px 0 120px; display: grid; grid-template-columns: minmax(0, 1fr) 480px; gap: 60px; align-items: end; overflow: hidden; }
+.svc-hero { padding-inline: var(--gutter); }
+.svc-ribbon { position: absolute; right: -140px; bottom: -120px; width: 620px; opacity: 0.18; transform: rotate(-12deg); pointer-events: none; }
+.svc-split { display: grid; grid-template-columns: 560px minmax(0, 1fr); gap: 60px; align-items: start; padding-bottom: var(--section); }
+.svc-sticky { position: sticky; top: 100px; }
+.svc-sticky-card { position: relative; height: 640px; border-radius: 24px; overflow: hidden; transition: background 0.5s; color: var(--bone); }
+.svc-sticky-img { animation: svc-fade 0.6s var(--ease-out); }
+@keyframes svc-fade { from { opacity: 0; transform: scale(1.04); } to { opacity: 1; transform: none; } }
+.svc-sticky-card .mono { position: absolute; left: 28px; top: 24px; }
+.svc-row { border-top: 1px solid var(--line-light); }
+.svc-row:last-child { border-bottom: 1px solid var(--line-light); }
+.svc-row-head { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 26px 0; text-align: left; min-height: 64px; }
+.svc-row-t { display: flex; align-items: baseline; gap: 24px; }
+.svc-row-name { font-size: clamp(20px, 2.2vw, 30px); line-height: 1.1; text-transform: uppercase; font-weight: 400; letter-spacing: 0; transition: color 0.18s; }
+.svc-row-head:hover .svc-row-name { color: var(--ochre); }
+.svc-row-body { flex-direction: column; gap: 24px; align-items: flex-start; padding: 0 0 36px 52px; }
+.svc-statement { position: relative; background: var(--ink); color: var(--bone); padding: clamp(120px, 16vw, 220px) var(--gutter); overflow: hidden; text-align: center; }
+.svc-statement h2 { font-size: clamp(36px, 6vw, 88px); line-height: 1; max-width: 1100px; margin: 0 auto; }
+.svc-spot { position: absolute; left: 50%; top: -40%; width: 70%; height: 80%; transform: translateX(-50%); background: radial-gradient(ellipse at 50% 30%, rgba(122,46,46,0.8) 0%, rgba(122,46,46,0.3) 35%, rgba(12,13,11,0) 65%); }
+.svc-diagram { background: var(--ink); color: var(--bone); padding: 40px var(--gutter) var(--section); display: flex; flex-direction: column; align-items: center; gap: 40px; }
+.svc-diagram svg { width: min(1200px, 100%); height: auto; }
+@media (max-width: 1000px) {
+  .svc-hero { grid-template-columns: 1fr; padding-top: 120px; }
+  .svc-split { grid-template-columns: 1fr; }
+  .svc-sticky { position: static; }
+  .svc-sticky-card { height: 260px; }
+  .svc-row-body { padding-left: 0; }
+}

@@ -1,0 +1,2 @@
+.mark3d { position: relative; width: 100%; height: clamp(360px, 62vh, 680px); touch-action: pan-y; }
+.mark3d canvas { display: block; width: 100% !important; height: 100% !important; }

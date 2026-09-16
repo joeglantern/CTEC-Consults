@@ -1,0 +1,25 @@
+.cc-wrap { padding-bottom: var(--section); }
+.cc {
+  position: relative; border-radius: 28px; background: var(--graphite); overflow: hidden;
+  display: grid; grid-template-columns: 440px minmax(0, 1fr);
+}
+.cc::before {
+  content: ""; position: absolute; inset: 0; border-radius: 28px; padding: 1px;
+  background: conic-gradient(from var(--angle, 0deg), var(--ochre), var(--oxblood), var(--ash), var(--ochre));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+  animation: spin 12s linear infinite;
+}
+@property --angle { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+@keyframes spin { to { --angle: 360deg; } }
+.cc-media { position: relative; min-height: 520px; overflow: hidden; background: radial-gradient(ellipse at 50% 60%, #1f201d 0%, var(--graphite) 70%); }
+.cc-media .pmark { position: absolute; inset: 0; }
+.cc-body { padding: 56px; display: flex; flex-direction: column; gap: 24px; justify-content: center; align-items: flex-start; }
+.cc-meta { display: flex; gap: 32px; flex-wrap: wrap; }
+@media (max-width: 900px) {
+  .cc { grid-template-columns: 1fr; }
+  .cc-media { min-height: 220px; }
+  .cc-body { padding: 28px 24px 32px; }
+  .cc-meta { flex-direction: column; gap: 8px; }
+}
+@media (prefers-reduced-motion: reduce) { .cc::before { animation: none; } }

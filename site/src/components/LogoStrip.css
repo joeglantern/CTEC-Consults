@@ -1,0 +1,57 @@
+/* Partner strip in the hero: bare logos as frosted glass silhouettes, full colour on hover */
+.lstrip {
+  position: relative; width: 100%; overflow: hidden; padding-block: 10px;
+  mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+}
+.lstrip-track {
+  display: flex; align-items: center; gap: clamp(56px, 6vw, 96px); width: max-content; padding-inline: clamp(28px, 3vw, 48px);
+  animation: lstrip-run calc(var(--n) * 4.6s) linear infinite;
+}
+.lstrip:hover .lstrip-track { animation-play-state: paused; }
+@keyframes lstrip-run { from { transform: translateX(0); } to { transform: translateX(calc(-50% - clamp(28px, 3vw, 48px))); } }
+
+.lstrip-item { display: block; flex: none; text-decoration: none; }
+.lstrip-logo { position: relative; display: block; transition: transform 0.6s var(--ease-out); }
+.lstrip-item:hover .lstrip-logo { transform: translateY(-2px) scale(1.05); }
+
+/* the real logo sets the box and only shows on hover */
+.lstrip-color {
+  display: block; height: 34px; width: auto; max-width: 190px; object-fit: contain;
+  opacity: 0; transition: opacity 0.45s var(--ease-out);
+}
+
+/* frosted glass cut to the logo's silhouette */
+.lstrip-glass {
+  position: absolute; inset: 0; overflow: hidden;
+  -webkit-mask: var(--logo) center / contain no-repeat; mask: var(--logo) center / contain no-repeat;
+  background:
+    linear-gradient(180deg, rgba(241,236,226,0.98) 0%, rgba(241,236,226,0.62) 38%, rgba(241,236,226,0.5) 62%, rgba(241,236,226,0.88) 100%);
+  opacity: 0.9;
+  transition: opacity 0.45s var(--ease-out);
+}
+.lstrip-glass::before {
+  /* light pooling along the top edge, the frosted look */
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(140% 70% at 50% -20%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 60%);
+}
+.lstrip-shine {
+  position: absolute; top: -60%; bottom: -60%; left: -70%; width: 45%;
+  background: linear-gradient(105deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-20deg); opacity: 0;
+}
+.lstrip-logo { filter: drop-shadow(0 8px 18px rgba(12,13,11,0.5)); }
+
+.lstrip-item:hover .lstrip-color { opacity: 1; }
+.lstrip-item:hover .lstrip-glass { opacity: 0; }
+.lstrip-item:hover .lstrip-shine { opacity: 1; animation: lstrip-shine 0.7s var(--ease-out) forwards; }
+@keyframes lstrip-shine { from { transform: skewX(-20deg) translateX(0); } to { transform: skewX(-20deg) translateX(420%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .lstrip-track { animation: none; }
+  .lstrip { overflow-x: auto; mask-image: none; -webkit-mask-image: none; }
+}
+@media (max-width: 900px) {
+  .lstrip-color { height: 26px; max-width: 140px; }
+  .lstrip-track { gap: 44px; }
+}

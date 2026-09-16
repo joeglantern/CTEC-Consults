@@ -1,0 +1,22 @@
+/* Index head: counter and particle word on one baseline */
+.eb {
+  display: flex; align-items: center; gap: 16px; color: var(--mist);
+  width: auto; max-width: 100%; font-weight: 400; margin: 0; min-height: 24px;
+}
+.on-light .eb { color: var(--mist-dark); }
+.stack .eb { align-self: flex-start; }
+.teaser-copy .eb, .ap-pin-head .eb, .ab-deck .eb, .lg-hero-copy .eb { align-self: center; justify-content: center; }
+.lg-hero-copy .eb, .stack .eb { align-self: flex-start; justify-content: flex-start; }
+
+.eb-num { flex-shrink: 0; font-size: 11px; letter-spacing: 0.12em; color: var(--ochre); min-width: 2ch; opacity: 0; transform: translateY(6px); transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out); }
+.eb-word { position: relative; display: inline-block; flex-shrink: 0; line-height: 0; }
+.eb-canvas { display: block; }
+
+/* the counter arrives with the word */
+.eb.is-in .eb-num, .is-in .eb .eb-num { opacity: 1; transform: none; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .eb-num { opacity: 1; transform: none; transition: none; }
+}
