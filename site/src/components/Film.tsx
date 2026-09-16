@@ -4,6 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { sectors } from "../content/site";
 import { TransitionLink } from "./PageTransition";
 import { reduceMotion } from "../hooks/useReveal";
+import { clip } from "../video";
 import "./Film.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -23,7 +24,8 @@ export function Film() {
   const root = useRef<HTMLElement>(null);
   const n = sectors.length;
   const [staticMode] = useState(() => reduceMotion());
-  const [useVideo] = useState(() => window.innerWidth >= 900 && !reduceMotion());
+  // phones get the clips too; only the chapter in view ever plays, so it stays cheap
+  const [useVideo] = useState(() => !reduceMotion());
 
   useEffect(() => {
     const el = root.current;
@@ -111,11 +113,11 @@ export function Film() {
         {sectors.map((s) => (
           <div key={s.id} className="film-layer">
             {useVideo && s.clip
-              ? <video src={s.clip} poster={s.poster ?? s.visual} muted playsInline loop preload="metadata" aria-hidden="true" />
+              ? <video src={clip(s.clip)} poster={s.poster ?? s.visual} muted playsInline loop preload="metadata" aria-hidden="true" />
               : <img src={s.visual} alt="" className="film-kb" />}
           </div>
         ))}
-        <video className="film-warp" src="/video/cgi-warp.mp4" muted playsInline preload="metadata" aria-hidden="true" onError={(e) => { e.currentTarget.style.display = "none"; }} />
+        <video className="film-warp" src={clip("/video/cgi-warp.mp4")} muted playsInline preload="metadata" aria-hidden="true" onError={(e) => { e.currentTarget.style.display = "none"; }} />
         <div className="film-scrim" aria-hidden="true" />
         <div className="grain" />
         <div className="film-caps container">

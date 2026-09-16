@@ -4,6 +4,7 @@ import { contactPage, contact, sectors } from "../content/site";
 import { Button } from "../components/Button";
 import { Words } from "../components/Words";
 import { useReveal } from "../hooks/useReveal";
+import { clip } from "../video";
 import "./Contact.css";
 
 export default function Contact() {
@@ -49,7 +50,7 @@ export default function Contact() {
           )}
         </div>
         <aside className="ct-right reveal">
-          <div className="ct-media"><video className="media-fill" src="/video/city-dusk.mp4" poster="/img/city-dusk-poster.jpg" muted playsInline loop autoPlay aria-hidden="true" /><div className="grain" /></div>
+          <div className="ct-media"><video className="media-fill" src={clip("/video/city-dusk.mp4")} poster="/img/city-dusk-poster.jpg" muted playsInline loop autoPlay aria-hidden="true" /><div className="grain" /></div>
           <Button href={`https://wa.me/${contact.phoneIntl}`}>{contactPage.whatsapp}</Button>
           <div className="ct-details mono muted">
             <a href={`mailto:${contact.email}`}><EnvelopeSimple size={16} color="#E0A030" /> {contact.email}</a>

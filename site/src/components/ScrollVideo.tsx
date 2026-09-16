@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { reduceMotion } from "../hooks/useReveal";
+import { clip } from "../video";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -42,8 +43,20 @@ export function ScrollVideo({ src, poster, mode = "loop", parallax = 12, classNa
       return;
     }
 
-    // scrub mode
+    // scrub mode.
+    // iOS will not paint a frame when you seek a video it has never played, which is
+    // why a scrubbed clip shows up blank on a phone. Playing and immediately pausing
+    // it once wakes the decoder, after which seeking paints normally.
     v.pause();
+    let primed = false;
+    const primer = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting || primed) return;
+      primed = true;
+      const p = v.play();
+      if (p && typeof p.then === "function") p.then(() => v.pause()).catch(() => {});
+      else v.pause();
+    }, { threshold: 0.01 });
+    primer.observe(v);
     let duration = 0;
     const onMeta = () => { duration = v.duration || 0; };
     v.addEventListener("loadedmetadata", onMeta);
@@ -62,7 +75,7 @@ export function ScrollVideo({ src, poster, mode = "loop", parallax = 12, classNa
         if (Math.abs(v.currentTime - t) > 0.04) { last = now; seeking = true; v.currentTime = t; }
       },
     });
-    return () => { v.removeEventListener("loadedmetadata", onMeta); v.removeEventListener("seeked", onSeeked); st.kill(); };
+    return () => { primer.disconnect(); v.removeEventListener("loadedmetadata", onMeta); v.removeEventListener("seeked", onSeeked); st.kill(); };
   }, [mode, parallax, triggerRef, range[0], range[1]]);
 
   return (
@@ -70,11 +83,13 @@ export function ScrollVideo({ src, poster, mode = "loop", parallax = 12, classNa
       ref={video}
       className={`media-fill ${className}`}
       style={{ ...style, transform: mode === "loop" ? "scale(1.14)" : undefined }}
-      src={src}
+      src={clip(src)}
       poster={poster}
       muted
       playsInline
+      autoPlay={mode === "loop"}
       loop={mode === "loop"}
+      data-scrub={mode === "scrub" ? "1" : undefined}
       preload={mode === "scrub" ? "auto" : "metadata"}
       aria-hidden="true"
     />

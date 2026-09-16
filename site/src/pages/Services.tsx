@@ -71,7 +71,7 @@ export default function Services() {
             <div key={s.id} id={s.id} className={`svc-row ${open === i ? "is-open" : ""}`}>
               <button className="svc-row-head" onClick={() => setOpen(i)} aria-expanded={open === i}>
                 <span className="svc-row-t"><span className="mono" style={{ color: "var(--mist-dark)", width: 28 }}>{String(i + 1).padStart(2, "0")}</span><span className="serif svc-row-name">{s.name}</span></span>
-                <span className="serif" style={{ fontSize: 30 }}>{open === i ? "−" : "+"}</span>
+                <span className="band-plus" aria-hidden="true">+</span>
               </button>
               <div className="svc-row-body" style={{ display: open === i ? "flex" : "none" }}>
                 <p className="body-lg muted">{s.body}</p>

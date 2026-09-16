@@ -44,16 +44,98 @@
 @media (max-width: 900px) {
   .hdr-right .btn { display: none; }
   .pill { display: none; }
+
+  /* One element, two shapes. The container clips and morphs; the layers inside keep
+     their own size and are centred on the container, so neither drifts as it changes.
+     Sizing them off each other in a grid is what made the collapsed pill sit off centre. */
   .bar {
-    position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; height: calc(64px + env(safe-area-inset-bottom, 0px));
-    padding-bottom: env(safe-area-inset-bottom, 0px);
-    background: rgba(24, 25, 23, 0.94); border-top: 1px solid var(--ash); backdrop-filter: blur(12px);
-    display: grid; grid-template-columns: repeat(5, 1fr); align-items: center;
-    transition: transform 0.3s var(--ease-out);
+    display: block;
+    position: fixed; z-index: 60; left: 50%; bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+    overflow: hidden;
+    width: min(calc(100vw - 28px), 460px); height: 62px; border-radius: 22px;
+    background: rgba(20, 21, 19, 0.96); border: 1px solid var(--ash);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    transform: translateX(-50%);
+    transition: width 0.5s var(--ease-out), height 0.5s var(--ease-out),
+                border-radius 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
   }
-  .bar.is-hidden { transform: translateY(100%); }
+  .bar.is-min {
+    width: 58px; height: 58px; border-radius: 999px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+  }
+
+  .bar-full, .bar-min {
+    position: absolute; left: 50%; top: 50%;
+    transition: opacity 0.24s var(--ease-out), transform 0.44s var(--ease-out);
+  }
+
+  /* holds the expanded width even while the container shrinks, so nothing reflows mid morph */
+  .bar-full {
+    width: min(calc(100vw - 30px), 458px);
+    display: grid; grid-template-columns: repeat(5, 1fr); align-items: center;
+    transform: translate(-50%, -50%);
+  }
+  .bar.is-min .bar-full { opacity: 0; transform: translate(-50%, -50%) scale(0.9); pointer-events: none; }
+
+  .bar-min {
+    display: grid; place-items: center; width: 58px; height: 58px;
+    background: none; border: 0; padding: 0; color: var(--bone);
+    opacity: 0; transform: translate(-50%, -50%) scale(0.75); pointer-events: none;
+  }
+  .bar.is-min .bar-min { opacity: 1; transform: translate(-50%, -50%) scale(1); pointer-events: auto; transition-delay: 0.06s; }
+  .bar-min-dots { display: grid; gap: 4px; }
+  .bar-min-dots i { display: block; width: 16px; height: 1.5px; border-radius: 2px; background: var(--bone); }
+  .bar-min-dots i:nth-child(2) { width: 11px; background: var(--ochre); }
+  .bar-min-dots i:nth-child(3) { width: 16px; }
+
   .bar-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--bone); position: relative; padding: 8px 0; }
   .bar-item .mono { font-size: 9px; }
   .bar-item.is-active::before { content: ""; position: absolute; top: 2px; width: 4px; height: 4px; border-radius: 50%; background: var(--ochre); }
   .brand-name { font-size: 18px; }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .bar, .bar-full, .bar-min { transition: none; }
+}
+
+/* services trigger in the desktop pill */
+.pill-svc { display: inline-flex; }
+.pill-caret { margin-left: 6px; transition: transform 0.35s var(--ease-out), color 0.2s; }
+.pill-link.is-lit { color: var(--ochre); }
+.pill-link.is-lit .pill-caret { transform: rotate(180deg); }
+
+/* Back to top on mobile. Sits above the bar, carries the scroll position as a ring,
+   and only exists once there is enough page behind you for the trip to be worth it. */
+.totop { display: none; }
+
+@media (max-width: 900px) {
+  .totop {
+    position: fixed; z-index: 61;
+    right: 16px; bottom: calc(86px + env(safe-area-inset-bottom, 0px));
+    display: grid; place-items: center; width: 44px; height: 44px; padding: 0;
+    border-radius: 50%; border: 1px solid var(--ash); color: var(--bone);
+    background: rgba(20, 21, 19, 0.92);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
+    opacity: 0; transform: translateY(10px) scale(0.86); pointer-events: none;
+    transition: opacity 0.34s var(--ease-out), transform 0.44s var(--ease-out), bottom 0.5s var(--ease-out);
+  }
+  .totop.is-on { opacity: 1; transform: none; pointer-events: auto; }
+  /* when the bar draws in, the button follows it down rather than floating alone */
+  .bar.is-min ~ .totop.is-on { bottom: calc(80px + env(safe-area-inset-bottom, 0px)); }
+  .totop:active { transform: scale(0.94); }
+
+  .totop svg:not(.totop-ring) { position: relative; z-index: 1; }
+  .totop-ring { position: absolute; inset: -1px; width: calc(100% + 2px); height: calc(100% + 2px); transform: rotate(-90deg); }
+  .totop-ring circle { fill: none; stroke-width: 1.5; }
+  .totop-track { stroke: color-mix(in oklab, var(--bone) 14%, transparent); }
+  /* pathLength is 1, so the dash can be driven straight off the scroll fraction */
+  .totop-fill {
+    stroke: var(--ochre);
+    stroke-dasharray: calc(var(--scroll, 0) * 1) 1;
+    stroke-linecap: round;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) { .totop { transition: none; } }

@@ -31,11 +31,14 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
   }, [onClose]);
 
   // one still per link, all mounted so the switch is a crossfade rather than a load
+  // paper is the still's own background, sampled from the file. On a narrow screen the
+  // image is shown whole against that colour rather than cropped, so the panel reads as
+  // one continuous sheet instead of a truncated photograph.
   const stills = [
-    { src: "/img/menu/menu-services.jpg", ink: false },
-    { src: "/img/menu/menu-approach.jpg", ink: false },
-    { src: "/img/menu/menu-sectors.jpg", ink: false },
-    { src: "/img/menu/menu-about.jpg", ink: true },
+    { src: "/img/menu/menu-services.jpg", ink: false, paper: "#6e342e" },
+    { src: "/img/menu/menu-approach.jpg", ink: false, paper: "#29341f" },
+    { src: "/img/menu/menu-sectors.jpg", ink: false, paper: "#1b2638" },
+    { src: "/img/menu/menu-about.jpg", ink: true, paper: "#bd7d18" },
   ];
   const cur = nav.links[hover];
 
@@ -62,7 +65,7 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
         <div className="ov-contact mono muted"><span>{contact.email}</span><span>{contact.phone}</span><span>{contact.location}</span></div>
       </div>
       <div className="ov-right">
-        <div className={`ov-panel ${stills[hover].ink ? "is-ink" : ""}`}>
+        <div className={`ov-panel ${stills[hover].ink ? "is-ink" : ""}`} style={{ background: stills[hover].paper }}>
           {stills.map((s, i) => <img key={s.src} src={s.src} alt="" className={`ov-img ${hover === i ? "is-on" : ""}`} draggable={false} />)}
           <div className="ov-poster" key={cur.to} aria-hidden="true">
             <span className="mono ov-poster-num">{String(hover + 1).padStart(2, "0")} / {String(nav.links.length).padStart(2, "0")}</span>

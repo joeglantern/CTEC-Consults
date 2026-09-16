@@ -2,17 +2,23 @@
 .stack-sm { display: flex; flex-direction: column; gap: 10px; }
 
 /* hero */
-.hero { position: relative; min-height: 100svh; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding-top: 120px; }
+/* The content sits low in the frame so the footage has room above it, but it is no
+   longer flush with the bottom edge. The ticker used to occupy that band; with it gone
+   the block needs its own floor, and that floor is roughly where the partner strip
+   will sit once there are logos for it. */
+.hero {
+  position: relative; min-height: 100svh; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding-top: 120px; padding-bottom: clamp(56px, 12vh, 132px);
+}
 .hero-scrim { background: linear-gradient(180deg, rgba(12,13,11,0.35) 0%, rgba(12,13,11,0.25) 40%, rgba(12,13,11,0.92) 100%); }
-.hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 440px; gap: 40px; align-items: end; padding-bottom: 40px; }
+.hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 440px; gap: 40px; align-items: end; }
 .hero-copy { display: flex; flex-direction: column; gap: 28px; }
-.hero-squiggle { display: inline-block; vertical-align: middle; width: clamp(90px, 14vw, 220px); height: auto; margin-left: 0.15em; transform: translateY(-0.05em); }
-.hero-shift { display: block; padding-left: clamp(40px, 15vw, 220px); }
+.hero-squiggle { display: inline-block; vertical-align: middle; height: auto; }
+/* the line trails off the end of the sentence: built to last, long after we leave, and on */
+.squig-trail { width: clamp(70px, 9vw, 170px); margin-left: 0.22em; transform: translateY(-0.12em); }
 .hero-side { display: flex; flex-direction: column; gap: 28px; align-items: flex-start; justify-self: end; }
-.hero-partners { position: relative; margin-bottom: 28px; }
-.hero-ticker { position: relative; display: flex; gap: 32px; align-items: center; border-top: 1px solid var(--ash); padding-top: 20px; padding-bottom: 40px; white-space: nowrap; overflow: hidden; }
-.ticker-item { animation: tick-in 0.6s var(--ease-out); }
-@keyframes tick-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.hero-partners { position: relative; margin-top: 44px; }
 
 /* services rail */
 .rail-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 48px; flex-wrap: wrap; }
@@ -73,6 +79,8 @@
 @media (max-width: 900px) {
   .hero-grid { grid-template-columns: 1fr; gap: 22px; }
   .hero-side { justify-self: start; }
-  .hero-shift { padding-left: 60px; }
-  .hero-squiggle { display: none; }
+  /* the headline keeps its three line shape instead of wrapping into a block */
+  .hero .h-hero { font-size: clamp(38px, 11.5vw, 68px); }
+  /* no squiggle on a phone: at this size it reads as a stray mark rather than a flourish */
+  .squig-trail { display: none; }
 }

@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { home, services, sectors, whyUs } from "../content/site";
+import { home, services, whyUs } from "../content/site";
 import { Button } from "../components/Button";
 import { Eyebrow } from "../components/Eyebrow";
 import { Words } from "../components/Words";
@@ -17,19 +17,28 @@ import "./Home.css";
 
 const arcs = ["M50 10 A40 40 0 0 0 10 50 L50 50 Z", "M90 50 A40 40 0 0 0 50 10 L50 50 Z", "M10 50 A40 40 0 0 0 50 90 L50 50 Z", "M50 90 A40 40 0 0 0 90 50 L50 50 Z"];
 
+const Squiggle = ({ className }: { className: string }) => (
+  <svg className={`hero-squiggle ${className}`} viewBox="0 0 220 40" fill="none" aria-hidden="true">
+                <path className="squig" d="M4 24 C 20 6, 32 6, 44 22 S 68 40, 82 22 S 106 4, 120 20 S 144 38, 158 20 S 182 4, 196 18 C 204 26, 210 26, 216 20" stroke="#E0A030" strokeWidth="2.5" strokeLinecap="round">
+                  <animate
+                    attributeName="d"
+                    dur="3.2s"
+                    repeatCount="indefinite"
+                    calcMode="spline"
+                    keyTimes="0;0.5;1"
+                    keySplines="0.45 0 0.55 1;0.45 0 0.55 1"
+                    values="M4 24 C 20 6, 32 6, 44 22 S 68 40, 82 22 S 106 4, 120 20 S 144 38, 158 20 S 182 4, 196 18 C 204 26, 210 26, 216 20;M4 18 C 20 34, 32 34, 44 20 S 68 4, 82 20 S 106 38, 120 22 S 144 6, 158 22 S 182 38, 196 24 C 204 16, 210 16, 216 22;M4 24 C 20 6, 32 6, 44 22 S 68 40, 82 22 S 106 4, 120 20 S 144 38, 158 20 S 182 4, 196 18 C 204 26, 210 26, 216 20"
+                  />
+                </path>
+              </svg>
+);
+
 export default function Home() {
   const page = useReveal<HTMLDivElement>();
   const rail = useDragRail<HTMLDivElement>();
   const whyRail = useDragRail<HTMLDivElement>();
   const teaser = useRef<HTMLElement>(null);
   const hero = useRef<HTMLElement>(null);
-  const [tick, setTick] = useState(0);
-
-  useEffect(() => {
-    const id = setInterval(() => setTick((t) => (t + 1) % sectors.length), 2600);
-    return () => clearInterval(id);
-  }, []);
-
   // hero: subtle mouse parallax on the footage
   useEffect(() => {
     const el = hero.current;
@@ -81,21 +90,9 @@ export default function Home() {
             <Eyebrow>{home.eyebrow}</Eyebrow>
             <h1 className="serif h-hero">
               <Words text={home.headline[0]} /><br />
-              <Words text={home.headline[1]} />
-              <svg className="hero-squiggle word" viewBox="0 0 220 40" fill="none" aria-hidden="true">
-                <path className="squig" d="M4 24 C 20 6, 32 6, 44 22 S 68 40, 82 22 S 106 4, 120 20 S 144 38, 158 20 S 182 4, 196 18 C 204 26, 210 26, 216 20" stroke="#E0A030" strokeWidth="2.5" strokeLinecap="round">
-                  <animate
-                    attributeName="d"
-                    dur="3.2s"
-                    repeatCount="indefinite"
-                    calcMode="spline"
-                    keyTimes="0;0.5;1"
-                    keySplines="0.45 0 0.55 1;0.45 0 0.55 1"
-                    values="M4 24 C 20 6, 32 6, 44 22 S 68 40, 82 22 S 106 4, 120 20 S 144 38, 158 20 S 182 4, 196 18 C 204 26, 210 26, 216 20;M4 18 C 20 34, 32 34, 44 20 S 68 4, 82 20 S 106 38, 120 22 S 144 6, 158 22 S 182 38, 196 24 C 204 16, 210 16, 216 22;M4 24 C 20 6, 32 6, 44 22 S 68 40, 82 22 S 106 4, 120 20 S 144 38, 158 20 S 182 4, 196 18 C 204 26, 210 26, 216 20"
-                  />
-                </path>
-              </svg><br />
-              <span className="hero-shift"><Words text={home.headline[2]} italic /></span>
+              <Words text={home.headline[1]} />{" "}
+              <Words text={home.headline[2]} italic />
+              <Squiggle className="squig-trail word" />
             </h1>
           </div>
           <div className="hero-side reveal">
@@ -104,10 +101,8 @@ export default function Home() {
           </div>
         </div>
         <div className="hero-partners"><LogoStrip /></div>
-        <div className="container hero-ticker mono muted">
-          <span style={{ color: "var(--ochre)" }}>Sectors</span>
-          <span key={tick} className="ticker-item">{sectors[tick].name}</span>
-        </div>
+        {/* this band belongs to the partner logos; it stays empty until they exist
+            rather than being filled with something that repeats the sectors page */}
       </section>
 
       {/* SERVICES RAIL */}

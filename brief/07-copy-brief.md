@@ -81,4 +81,4 @@ Nav labels, menu overlay captions (one line per page, max 10 words), footer: hea
 2. Read `01-inspo-breakdown.md` sections marked Keep and Adapt so you know what the words sit inside.
 3. Draft `home.md` first and stop. Post it back so Liban can check the voice before you do the rest.
 4. Then the remaining pages.
-5. Run your own pass for banned words and em dashes before delivering. Search the files for the character "—" and for each banned word.
+5. Run your own pass for banned words and em dashes before delivering. Search the files for the em dash character, unicode U+2014, and for each banned word.

@@ -47,4 +47,14 @@
   .ov-word { font-size: 44px; }
 }
 
-@media (max-width: 900px) { .ov-panel { width: 100%; height: 200px; } .ov-poster-title { font-size: 34px; } .ov-poster-cap { display: none; } }
+@media (max-width: 900px) {
+  /* the stills are 4:5 compositions with even margins, so cropping them to a wide strip
+     cuts the subject. Shown whole against their own paper colour instead, the panel
+     stays full width and nothing is lost. */
+  .ov-panel { width: 100%; height: 190px; transition: background 0.5s var(--ease-out); }
+  .ov-img { object-fit: contain; }
+  .ov-poster { padding: 16px 18px; }
+  .ov-poster-title { font-size: 30px; }
+  .ov-poster-cap { display: none; }
+  .ov-poster::before { inset: 10px; }
+}

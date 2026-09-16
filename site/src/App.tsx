@@ -11,6 +11,8 @@ import { Loader } from "./components/Loader";
 import { Cursor } from "./components/Cursor";
 import { meta } from "./content/site";
 import { reduceMotion } from "./hooks/useReveal";
+import { appMounted, handOver, painted } from "./boot";
+import { unlockVideoOnFirstTouch } from "./video";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
 import Approach from "./pages/Approach";
@@ -27,6 +29,25 @@ export default function App() {
   const [menu, setMenu] = useState(false);
   const [ready, setReady] = useState(false);
   const onLoaded = useCallback(() => setReady(true), []);
+  // the intro mounts behind the boot screen, then starts once the boot screen has lifted
+  const [introMounted, setIntroMounted] = useState(false);
+  const [introStart, setIntroStart] = useState(false);
+
+  useEffect(() => unlockVideoOnFirstTouch(), []);
+
+  useEffect(() => {
+    let alive = true;
+    appMounted();
+    // the intro mounts straight away and covers the screen, so the boot screen can
+    // step aside as soon as it has painted. Nothing heavy is waited on out here.
+    setIntroMounted(true);
+    (async () => {
+      await painted();
+      await handOver();
+      if (alive) setIntroStart(true);
+    })();
+    return () => { alive = false; };
+  }, []);
 
   useEffect(() => {
     if (reduceMotion()) return;
@@ -55,7 +76,7 @@ export default function App() {
 
   return (
     <TransitionProvider>
-      <Loader onDone={onLoaded} />
+      {introMounted && <Loader start={introStart} onDone={onLoaded} />}
       <Cursor />
       <Nav onMenu={() => setMenu(true)} />
       <MenuOverlay open={menu} onClose={() => setMenu(false)} />

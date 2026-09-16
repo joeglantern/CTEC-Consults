@@ -16,11 +16,24 @@
 .ct-ok { border: 1px solid var(--moss); background: rgba(58,107,74,0.15); }
 .ct-err { border: 1px solid var(--oxblood); background: rgba(122,46,46,0.15); }
 .ct-right { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; }
-.ct-media { position: relative; width: 100%; height: 560px; border-radius: 24px; overflow: hidden; border: 1px solid var(--ash); }
+/* No frame. The clip runs larger than its column and every edge is feathered away
+   with a mask, so it bleeds into the page instead of stopping at a border. */
+.ct-media {
+  position: relative; width: calc(100% + 80px); margin: -20px -40px 0; height: 680px; overflow: visible;
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0, #000 16%, #000 84%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 14%, #000 82%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, transparent 0, #000 16%, #000 84%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 14%, #000 82%, transparent 100%);
+  mask-composite: intersect;
+}
+.ct-media .grain { opacity: 0.35; }
 .ct-details { display: flex; flex-direction: column; gap: 14px; border-top: 1px solid var(--ash); padding-top: 24px; width: 100%; }
 .ct-details a, .ct-details span { display: inline-flex; align-items: center; gap: 12px; }
 @media (max-width: 1000px) {
   .ct-grid { grid-template-columns: 1fr; gap: 40px; padding-top: 120px; }
   .ct-form { grid-template-columns: 1fr; } .field-full { grid-column: auto; }
-  .ct-media { height: 240px; }
+  .ct-media { width: calc(100% + 40px); margin: -10px -20px 0; height: 340px; }
 }

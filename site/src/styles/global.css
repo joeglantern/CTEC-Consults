@@ -127,7 +127,7 @@ ul { padding: 0; list-style: none; }
 .band-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 28px var(--gutter); max-width: var(--container); margin: 0 auto; }
 .band-title { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(22px, 2.6vw, 36px); line-height: 1.15; }
 .band-plus { font-family: var(--serif); font-size: 30px; transition: transform 0.4s var(--ease-out); }
-.band.is-open .band-plus { transform: rotate(45deg); }
+.band.is-open .band-plus, .svc-row.is-open .band-plus { transform: rotate(45deg); }
 .band-body { overflow: hidden; height: 0; }
 .band-inner { display: grid; grid-template-columns: minmax(0, 1fr) 520px; gap: 60px; align-items: start; padding: 20px var(--gutter) 64px; max-width: var(--container); margin: 0 auto; }
 @media (max-width: 900px) { .band-inner { grid-template-columns: 1fr; gap: 28px; } }
