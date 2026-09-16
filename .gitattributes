@@ -1,0 +1,11 @@
+# Shell scripts must keep unix line endings or bash on the server fails on the
+# carriage returns. Everything else can follow the platform default.
+*.sh text eol=lf
+*.mjs text eol=lf
+*.conf text eol=lf
+
+*.png binary
+*.jpg binary
+*.mp4 binary
+*.glb binary
+*.ttf binary
