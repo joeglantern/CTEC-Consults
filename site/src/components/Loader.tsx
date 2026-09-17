@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { reduceMotion } from "../hooks/useReveal";
 import { assetsReady } from "../boot";
+import { silence } from "../video";
 import "./Loader.css";
 
 const COLS = 12;
@@ -78,7 +79,7 @@ export function Loader({ start, onDone }: { start: boolean; onDone: () => void }
       {/* a loader sized cut of the ink: 270 KB against the full clip's 9.8 MB. The full
           one cannot buffer inside the two seconds this is on screen, which is why it
           used to sit on its first frame on a phone. */}
-      <video className="ld-ink" src="/video/cgi-ink-loader.mp4" muted playsInline autoPlay loop preload="auto" />
+      <video ref={silence} className="ld-ink" src="/video/cgi-ink-loader.mp4" muted playsInline autoPlay loop preload="auto" />
       <div className="ld-grid">
         {Array.from({ length: COLS * ROWS }).map((_, i) => (
           <span key={i} className="ld-tile">

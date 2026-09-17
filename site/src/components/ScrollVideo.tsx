@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { reduceMotion } from "../hooks/useReveal";
-import { clip } from "../video";
+import { clip, silence } from "../video";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -80,7 +80,7 @@ export function ScrollVideo({ src, poster, mode = "loop", parallax = 12, classNa
 
   return (
     <video
-      ref={video}
+      ref={(el) => { video.current = el; silence(el); }}
       className={`media-fill ${className}`}
       style={{ ...style, transform: mode === "loop" ? "scale(1.14)" : undefined }}
       src={clip(src)}

@@ -17,29 +17,50 @@ export function clip(src: string): string {
 }
 
 /**
- * Some phones refuse to start muted video until the page has been touched once, and in
- * Low Power Mode they refuse until then no matter what. This retries every clip that is
- * supposed to be running, on the first interaction, and then gets out of the way.
+ * Some phones refuse to start muted video until the page has been touched, and in Low
+ * Power Mode they refuse indefinitely. This retries on every interaction rather than
+ * only the first, because the first tap often happens before a given clip has scrolled
+ * into view, and only for clips that are on screen and meant to be running.
  */
 export function unlockVideoOnFirstTouch(): () => void {
   if (typeof window === "undefined") return () => {};
-  let spent = false;
+  let last = 0;
   const kick = () => {
-    if (spent) return;
-    spent = true;
+    const now = Date.now();
+    if (now - last < 400) return;   // a tap is one gesture, not a burst
+    last = now;
     document.querySelectorAll<HTMLVideoElement>("video").forEach((v) => {
-      if (v.dataset.scrub === "1" || !v.paused) return;
-      // only wake the ones that are meant to be playing by themselves
-      if (v.autoplay || v.loop) v.play().catch(() => {});
+      if (!v.paused || v.dataset.scrub === "1") return;
+      if (!(v.autoplay || v.loop)) return;
+      const r = v.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight || r.width === 0) return;
+      v.play().catch(() => {});
     });
   };
   const opts = { passive: true } as AddEventListenerOptions;
   window.addEventListener("touchstart", kick, opts);
   window.addEventListener("pointerdown", kick, opts);
-  window.addEventListener("scroll", kick, opts);
   return () => {
     window.removeEventListener("touchstart", kick);
     window.removeEventListener("pointerdown", kick);
-    window.removeEventListener("scroll", kick);
   };
+}
+
+/**
+ * Makes a video eligible for inline autoplay on iOS.
+ *
+ * React applies `muted` as a DOM property rather than writing the attribute into the
+ * markup, but Safari reads the attribute when it decides whether a video may start by
+ * itself. It therefore sees an unmuted autoplaying video, refuses, and draws a play
+ * badge over it. Setting the attributes on the element itself, in a ref callback that
+ * runs before paint, is what actually satisfies the rule.
+ */
+export function silence(el: HTMLVideoElement | null): void {
+  if (!el) return;
+  el.muted = true;
+  el.defaultMuted = true;
+  el.setAttribute("muted", "");
+  el.setAttribute("playsinline", "");
+  el.setAttribute("webkit-playsinline", "");
+  el.setAttribute("disableremoteplayback", "");
 }
